@@ -16,12 +16,14 @@ def factorize(*numbers) -> list:
     This function takes a list of numbers and returns a list of lists containing the factors of each number.
     Uses multiprocessing to factorize numbers in parallel.
     """
-    with multiprocessing.Pool() as pool:
+    cores = multiprocessing.cpu_count()
+    with multiprocessing.Pool(processes= cores ) as pool:
         return pool.map(fectorize_number, numbers)
 
 
 if __name__ == "__main__":
 
+    print(f"CPU cores available: {multiprocessing.cpu_count()}")
     start_time = time.time()
 
     a, b, c, d = factorize(128, 255, 99999, 10651060)
